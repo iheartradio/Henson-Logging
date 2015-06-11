@@ -44,9 +44,9 @@ class Logging:
     """An interface to use structured logging.
 
     Args:
-        app (optional): An application instance that has an attribute
-          named settings that contains a mapping of settings to
-          configure logging.
+        app (:class:`~henson.Application`, optional): An application
+          instance that has an attribute named settings that contains a
+          mapping of settings to configure logging.
     """
 
     def __init__(self, app=None):
@@ -61,9 +61,9 @@ class Logging:
         """Initialize an application for structured logging.
 
         Args:
-            app (optional): An application instance that has an
-              attribute named settings that contains a mapping of
-              settings to configure logging.
+            app (:class:`~henson.Application`): An application instance
+              that has an attribute named settings that contains a
+              mapping of settings to configure logging.
         """
         app.settings.setdefault('LOG_DATE_FORMAT', None)
         app.settings.setdefault('LOG_FORMAT', '%(message)s\n')
