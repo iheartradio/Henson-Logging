@@ -51,7 +51,7 @@ class Logging:
 
     def __init__(self, app=None):
         """Initialize the instance."""
-        self._logger = {}
+        self._logger = None
 
         self.app = app
         if app is not None:
