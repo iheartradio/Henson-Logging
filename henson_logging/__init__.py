@@ -3,40 +3,11 @@
 import logging
 import logging.config
 
-from henson import current_application
 import structlog
 
 from . import processors
 
 __all__ = ('Logging',)
-
-
-def get_app(app=None):
-    """Return an application.
-
-    If no application is provided through ``app``, the current
-    application will be loaded from Henson.
-
-    Args:
-        app (:class:`~henson.Application`, optional): An application
-          that will be returned if provided.
-
-    Returns:
-        :class:`~henson.Application`: The application.
-
-    Raises:
-        RuntimeError: There is no application.
-    """
-    if app is not None:
-        return app
-
-    app = current_application
-    if app:
-        return app
-
-    raise RuntimeError(
-        'The client is not registered to an application and no '
-        'application is available.')
 
 
 class Logging:
@@ -51,9 +22,9 @@ class Logging:
 
     def __init__(self, app=None):
         """Initialize the instance."""
+        self._app = None
         self._logger = None
 
-        self.app = app
         if app is not None:
             self.init_app(app)
 
@@ -89,6 +60,17 @@ class Logging:
         app.settings.setdefault(
             'LOG_WRAPPER_CLASS', structlog.stdlib.BoundLogger)
 
+        self._app = app
+
+    @property
+    def app(self):
+        """Return the registered app."""
+        if not self._app:
+            raise RuntimeError(
+                'No application has been assigned to this instance. '
+                'init_app must be called before referencing instance.app.')
+        return self._app
+
     critical = lambda s, *a, **kw: s.logger.critical(*a, **kw)
     debug = lambda s, *a, **kw: s.logger.debug(*a, **kw)
     error = lambda s, *a, **kw: s.logger.error(*a, **kw)
@@ -106,26 +88,25 @@ class Logging:
             :class:`~logging.RootLogger`: The logger.
         """
         if not self._logger:
-            app = get_app(self.app)
 
             settings = {
-                'version': app.settings['LOG_VERSION'],
+                'version': self.app.settings['LOG_VERSION'],
                 'formatters': {
                     'henson': {
-                        'format': app.settings['LOG_FORMAT'],
-                        'datefmt': app.settings['LOG_DATE_FORMAT'],
+                        'format': self.app.settings['LOG_FORMAT'],
+                        'datefmt': self.app.settings['LOG_DATE_FORMAT'],
                     },
                 },
                 'handlers': {
                     'henson': {
-                        'class': app.settings['LOG_HANDLER'],
+                        'class': self.app.settings['LOG_HANDLER'],
                         'formatter': 'henson',
                     },
                 },
                 'loggers': {
-                    app.name: {
+                    self.app.name: {
                         'handlers': ['henson'],
-                        'level': app.settings['LOG_LEVEL'],
+                        'level': self.app.settings['LOG_LEVEL'],
                     },
                 }
             }
@@ -133,13 +114,13 @@ class Logging:
             logging.config.dictConfig(settings)
 
             structlog.configure(
-                processors=app.settings['LOG_PROCESSORS'],
-                context_class=app.settings['LOG_CONTEXT_CLASS'],
-                logger_factory=app.settings['LOG_FACTORY'],
-                wrapper_class=app.settings['LOG_WRAPPER_CLASS'],
+                processors=self.app.settings['LOG_PROCESSORS'],
+                context_class=self.app.settings['LOG_CONTEXT_CLASS'],
+                logger_factory=self.app.settings['LOG_FACTORY'],
+                wrapper_class=self.app.settings['LOG_WRAPPER_CLASS'],
                 cache_logger_on_first_use=True,
             )
 
-            self._logger = structlog.get_logger(app.name)
+            self._logger = structlog.get_logger(self.app.name)
 
         return self._logger
