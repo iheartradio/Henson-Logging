@@ -3,6 +3,7 @@
 import logging
 import logging.config
 
+from henson import Extension
 import structlog
 
 from . import processors
@@ -10,7 +11,7 @@ from . import processors
 __all__ = ('Logging',)
 
 
-class Logging:
+class Logging(Extension):
 
     """An interface to use structured logging.
 
@@ -20,32 +21,17 @@ class Logging:
           mapping of settings to configure logging.
     """
 
-    def __init__(self, app=None):
-        """Initialize the instance."""
-        self._app = None
-        self._logger = None
-
-        if app is not None:
-            self.init_app(app)
-
-    def init_app(self, app):
-        """Initialize an application for structured logging.
-
-        Args:
-            app (:class:`~henson.Application`): An application instance
-              that has an attribute named settings that contains a
-              mapping of settings to configure logging.
-        """
-        app.settings.setdefault('LOG_DATE_FORMAT', None)
-        app.settings.setdefault('LOG_FORMAT', '%(message)s\n')
-        app.settings.setdefault('LOG_HANDLER', 'logging.StreamHandler')
-        app.settings.setdefault('LOG_LEVEL', 'DEBUG')
-        app.settings.setdefault('LOG_VERSION', 1)
+    DEFAULT_SETTINGS = {
+        'LOG_DATE_FORMAT': None,
+        'LOG_FORMAT': '%(message)s\n',
+        'LOG_HANDLER': 'logging.StreamHandler',
+        'LOG_LEVEL': 'DEBUG',
+        'LOG_VERSION': 1,
 
         # TODO: The format for TimeStamper should be controllable
         # through the application settings. Right now the
         # LOG_DATE_FORMAT setting is ignored.
-        app.settings.setdefault('LOG_PROCESSORS', (
+        'LOG_PROCESSORS': (
             structlog.stdlib.filter_by_level,
             processors.add_logger_name,
             structlog.stdlib.add_log_level,
@@ -53,23 +39,18 @@ class Logging:
             structlog.processors.StackInfoRenderer(),
             structlog.processors.format_exc_info,
             structlog.processors.JSONRenderer(),
-        ))
-        app.settings.setdefault('LOG_CONTEXT_CLASS', dict)
-        app.settings.setdefault(
-            'LOG_FACTORY', structlog.stdlib.LoggerFactory())
-        app.settings.setdefault(
-            'LOG_WRAPPER_CLASS', structlog.stdlib.BoundLogger)
+        ),
 
-        self._app = app
+        'LOG_CONTEXT_CLASS': dict,
+        'LOG_FACTORY': structlog.stdlib.LoggerFactory(),
+        'LOG_WRAPPER_CLASS': structlog.stdlib.BoundLogger,
+    }
 
-    @property
-    def app(self):
-        """Return the registered app."""
-        if not self._app:
-            raise RuntimeError(
-                'No application has been assigned to this instance. '
-                'init_app must be called before referencing instance.app.')
-        return self._app
+    def __init__(self, app=None):
+        """Initialize the instance."""
+        self._logger = None
+
+        super().__init__(app)
 
     critical = lambda s, *a, **kw: s.logger.critical(*a, **kw)
     debug = lambda s, *a, **kw: s.logger.debug(*a, **kw)
