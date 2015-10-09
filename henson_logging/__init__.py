@@ -1,5 +1,6 @@
 """Logging plugin for Henson."""
 
+from pkg_resources import get_distribution
 import logging
 import logging.config
 
@@ -9,10 +10,10 @@ import structlog
 from . import processors
 
 __all__ = ('Logging',)
+__version__ = get_distribution(__package__).version
 
 
 class Logging(Extension):
-
     """An interface to use structured logging.
 
     Args:
