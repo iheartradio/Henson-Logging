@@ -48,6 +48,14 @@ settings.
     are intended for future and/or advanced uses, and as such have been omitted
     from the section.
 
+Contents:
+
+.. toctree::
+   :maxdepth: 1
+
+   changes
+
+
 Indices and tables
 ==================
 
