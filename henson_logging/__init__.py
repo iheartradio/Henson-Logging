@@ -26,6 +26,7 @@ class Logging(Extension):
         'LOG_DATE_FORMAT': None,
         'LOG_FORMAT': '%(message)s\n',
         'LOG_HANDLER': 'logging.StreamHandler',
+        'LOG_HANDLER_KWARGS': {},
         'LOG_LEVEL': 'DEBUG',
         'LOG_VERSION': 1,
 
@@ -81,9 +82,10 @@ class Logging(Extension):
                 },
                 'handlers': {
                     'henson': {
+                        **self.app.settings['LOG_HANDLER_KWARGS'],
                         'class': self.app.settings['LOG_HANDLER'],
                         'formatter': 'henson',
-                    },
+                    }
                 },
                 'loggers': {
                     self.app.name: {
