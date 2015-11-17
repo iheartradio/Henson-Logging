@@ -25,6 +25,7 @@ class Logging(Extension):
     DEFAULT_SETTINGS = {
         'LOG_DATE_FORMAT': None,
         'LOG_FORMAT': '%(message)s\n',
+        'LOG_FORMATTER': 'henson',
         'LOG_HANDLER': 'logging.StreamHandler',
         'LOG_HANDLER_KWARGS': {},
         'LOG_LEVEL': 'DEBUG',
@@ -84,8 +85,8 @@ class Logging(Extension):
                     'henson': {
                         **self.app.settings['LOG_HANDLER_KWARGS'],
                         'class': self.app.settings['LOG_HANDLER'],
-                        'formatter': 'henson',
-                    }
+                        'formatter': self.app.settings['LOG_FORMATTER'],
+                    },
                 },
                 'loggers': {
                     self.app.name: {
