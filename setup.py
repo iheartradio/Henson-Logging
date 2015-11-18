@@ -12,7 +12,14 @@ setup(
         'tox',
     ],
     classifiers=[
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
+        'Natural Language :: English',
+        'Operating System :: POSIX',
+        'Programming Language :: Python',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3 :: Only',
-    ],
+        'Topic :: Software Development :: Libraries :: Application Frameworks',
+    ]
 )
