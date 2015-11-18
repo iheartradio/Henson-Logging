@@ -25,23 +25,35 @@ Configuration
 The following configuration settings can be added to the application's
 settings.
 
-===================== =========================================================
-``LOG_FORMAT``        The :class:`logging.LogRecord` format to use when
-                      logging messages. For most uses the default format is
-                      sufficient as all names added to the message will be
-                      included in it. Any additional values provided through
-                      :class:`logging.LogRecord` can be included in the message
-                      through the use of processors.
-                      default: ``'%(message)s\n'``
-``LOG_HANDLER``       The log handler to use.
-                      default: ``'logging.StreamHandler'``
-``LOG_LEVEL``         The threshold of logged messages. Any messages below this
-                      level will be ignored.
-                      default: ``'INFO'``
-``LOG_CONTEXT_CLASS`` The type of mapping to use to track field names included
-                      in messages.
-                      default: ``dict``
-===================== =========================================================
++------------------------+----------------------------------------------------+
+| ``LOG_FORMAT``         | The :class:`logging.LogRecord` format to use when  |
+|                        | logging messages. For most uses the default format |
+|                        | is sufficient as all names added to the message    |
+|                        | will be included in it. Any additional values      |
+|                        | provided through :class:`logging.LogRecord` can    |
+|                        | be included in the message through the use of      |
+|                        | of processors.                                     |
+|                        | default: ``'%(message)s\n'``                       |
++------------------------+----------------------------------------------------+
+| ``LOG_FORMATTER``      | The formatter to use in conjunction with the       |
+|                        | handler.                                           |
+|                        | default: ``'henson'``                              |
++------------------------+----------------------------------------------------+
+| ``LOG_HANDLER``        | The log handler to use.                            |
+|                        | default: ``'logging.StreamHandler'``               |
++------------------------+----------------------------------------------------+
+| ``LOG_HANDLER_KWARGS`` | A dict of kwargs to be passed to the log handler   |
+|                        | class's ``__init__`` method.                       |
+|                        | default: ``{}``                                    |
++------------------------+----------------------------------------------------+
+| ``LOG_LEVEL``          | The threshold of logged messages. Any messages     |
+|                        | below this level will be ignored.                  |
+|                        | default: ``'INFO'``                                |
++------------------------+----------------------------------------------------+
+| ``LOG_CONTEXT_CLASS``  | The type of mapping to use to track field names    |
+|                        | included in messages.                              |
+|                        | default: ``dict``                                  |
++------------------------+----------------------------------------------------+
 
 .. note::
     There are other configuration settings supported by Henson-Logging but they
