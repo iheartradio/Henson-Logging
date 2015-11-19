@@ -5,7 +5,7 @@ Changelog
 Version 0.2.0
 =============
 
-Release TBD
+Released 2015-11-19
 
 - Add support for log handler kwargs (*Note: this change drops support for
   Python 3.4 and requires 3.5+*)
