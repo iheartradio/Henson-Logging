@@ -17,9 +17,9 @@ class Logging(Extension):
     """An interface to use structured logging.
 
     Args:
-        app (:class:`~henson.Application`, optional): An application
-          instance that has an attribute named settings that contains a
-          mapping of settings to configure logging.
+        app (henson.base.Application, optional): An application
+            instance that has an attribute named settings that contains
+            a mapping of settings to configure logging.
     """
 
     DEFAULT_SETTINGS = {
@@ -69,7 +69,7 @@ class Logging(Extension):
         """Return the logger.
 
         Returns:
-            :class:`~logging.RootLogger`: The logger.
+            logging.RootLogger: The logger.
         """
         if not self._logger:
 
