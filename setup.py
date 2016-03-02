@@ -1,16 +1,45 @@
 from setuptools import find_packages, setup
+from setuptools.command.test import test as TestCommand
+import sys
+
+
+class PyTest(TestCommand):
+    def finalize_options(self):
+        super().finalize_options()
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        import pytest
+        sys.exit(pytest.main(self.test_args))
+
+
+def read(filename):
+    with open(filename) as f:
+        return f.read()
+
 
 setup(
     name='Henson-Logging',
     version='0.3.0',
+    author='Andy Dirnberger, Jon Banafato, and others',
+    author_email='henson@iheart.com',
+    url='https://henson-logging.rtfd.org',
+    description='A library to use structured logging with a Henson application.',
+    long_description=read('README.rst'),
+    license='Apache License, Version 2.0',
     packages=find_packages(exclude=['tests']),
+    zip_safe=False,
     install_requires=[
         'Henson>=0.2.0',
         'structlog',
     ],
     tests_require=[
-        'tox',
+        'pytest',
     ],
+    cmdclass={
+        'test': PyTest,
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
