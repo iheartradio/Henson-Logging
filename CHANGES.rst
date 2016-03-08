@@ -1,7 +1,7 @@
 Version 0.3.0
 =============
 
-Release TBD
+- Replace Henson's logger with the instance of ``Logging``
 
 
 Version 0.2.0
