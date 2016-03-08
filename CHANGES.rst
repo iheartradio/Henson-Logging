@@ -1,6 +1,8 @@
 Version 0.3.0
 =============
 
+Released 2016-03-08
+
 - Replace Henson's logger with the instance of ``Logging``
 
 
