@@ -18,7 +18,6 @@ def read(filename):
     with open(filename) as f:
         return f.read()
 
-
 setup(
     name='Henson-Logging',
     version='0.3.0',
@@ -31,7 +30,7 @@ setup(
     packages=find_packages(exclude=['tests']),
     zip_safe=False,
     install_requires=[
-        'Henson>=0.2.0',
+        'Henson',
         'structlog',
     ],
     tests_require=[
