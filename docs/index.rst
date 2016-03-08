@@ -13,11 +13,11 @@ Quickstart
     from henson import Application
     from henson_logging import Logging
 
-    logger = Logging()
-    app = Application(__name__, logger=logger)
-    logger.init_app(app)
+    app = Application(__name__)
+    logger = Logging(app)
 
-.. todo:: Fix this API. It's awkward.
+In addition to giving you a logger that can be used throughout your
+application, it will replace Henson's internal logger with the new one.
 
 Configuration
 =============

@@ -62,9 +62,10 @@ class Logging(Extension):
 
     def __init__(self, app=None):
         """Initialize the instance."""
-        self._logger = None
-
         super().__init__(app)
+
+        self._logger = None
+        app.logger = self
 
     critical = lambda s, *a, **kw: s.logger.critical(*a, **kw)
     debug = lambda s, *a, **kw: s.logger.debug(*a, **kw)
@@ -73,6 +74,7 @@ class Logging(Extension):
     exception = lambda s, *a, **kw: s.logger.exception(*a, **kw)
     fatal = lambda s, *a, **kw: s.logger.fatal(*a, **kw)
     log = lambda s, *a, **kw: s.logger.log(*a, **kw)
+    setLevel = lambda s, l: s.logger.setLevel(l)
     warning = lambda s, *a, **kw: s.logger.warning(*a, **kw)
 
     @property
@@ -83,7 +85,6 @@ class Logging(Extension):
             logging.RootLogger: The logger.
         """
         if not self._logger:
-
             settings = {
                 'version': self.app.settings['LOG_VERSION'],
                 'formatters': {
