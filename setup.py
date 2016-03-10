@@ -20,7 +20,7 @@ def read(filename):
 
 setup(
     name='Henson-Logging',
-    version='0.3.0',
+    version='0.4.0',
     author='Andy Dirnberger, Jon Banafato, and others',
     author_email='henson@iheart.com',
     url='https://henson-logging.rtfd.org',
