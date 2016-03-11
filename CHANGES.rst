@@ -3,6 +3,8 @@ Version 0.3.1
 
 Release TBD
 
+- Fix usage with application factory pattern
+
 Version 0.3.0
 =============
 

@@ -65,6 +65,15 @@ class Logging(Extension):
         super().__init__(app)
 
         self._logger = None
+
+    def init_app(self, app):
+        """Initialize the application and register a logger.
+
+        Args:
+            app (henson.base.Application): The application to
+                initialize.
+        """
+        super().init_app(app)
         app.logger = self
 
     critical = lambda s, *a, **kw: s.logger.critical(*a, **kw)
