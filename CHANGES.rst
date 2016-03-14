@@ -1,7 +1,7 @@
 Version 0.3.1
 =============
 
-Release TBD
+Released 2016-03-14
 
 - Fix usage with application factory pattern
 
