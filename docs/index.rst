@@ -3,7 +3,7 @@ Henson-Logging
 ==============
 
 Henson-Logging is a plugin that allows you to easily use structured logging
-(via `structlog <http://structlog.rtfd.org>`_) with a Henson application.
+(via `structlog <http://structlog.readthedocs.io>`_) with a Henson application.
 
 Quickstart
 ==========
