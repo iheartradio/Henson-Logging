@@ -7,7 +7,7 @@ Henson-Logging |build status|
 
 A library to use structured logging with a Henson application.
 
-* `Documentation <https://henson-logging.rtfd.org>`_
-* `Installation <https://henson-logging.readthedocs.org/en/latest/#installation>`_
-* `Changelog <https://henson-logging.readthedocs.org/en/latest/changes.html>`_
+* `Documentation <https://henson-logging.readthedocs.io>`_
+* `Installation <https://henson-logging.readthedocs.io/en/latest/#installation>`_
+* `Changelog <https://henson-logging.readthedocs.io/en/latest/changes.html>`_
 * `Source <https://github.com/iheartradio/Henson-logging>`_
