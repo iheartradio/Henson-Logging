@@ -4,6 +4,8 @@ Version 0.4.0
 Release TBD
 
 - Fix usage with application factory pattern
+- Resolve the logging instance at first access instead of keeping a reference
+  to a proxy object
 
 Version 0.3.1
 =============
