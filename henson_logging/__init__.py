@@ -127,6 +127,6 @@ class Logging(Extension):
                 cache_logger_on_first_use=True,
             )
 
-            self._logger = structlog.get_logger(self.app.name)
+            self._logger = structlog.get_logger(self.app.name).bind()
 
         return self._logger
