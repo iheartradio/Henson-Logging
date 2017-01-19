@@ -86,6 +86,21 @@ class Logging(Extension):
     setLevel = lambda s, l: s.logger.setLevel(l)
     warning = lambda s, *a, **kw: s.logger.warning(*a, **kw)
 
+    def get_effective_level(self):
+        """Return the effective level for the logger.
+
+        Returns:
+            int: The effective level.
+
+        .. versionadded:: 0.4
+        """
+        return self.logger.getEffectiveLevel()
+
+    getEffectiveLevel = get_effective_level
+    """An alias for :meth:`get_effective_level` provided for
+    compatibility with :meth:`logging.Logger.getEffectiveLevel`.
+    """
+
     @property
     def logger(self):
         """Return the logger.
@@ -130,3 +145,20 @@ class Logging(Extension):
             self._logger = structlog.get_logger(self.app.name).bind()
 
         return self._logger
+
+    def set_level(self, level):
+        """Set the logging level for the logger.
+
+        Args:
+            level (~typing.Union[int, str]): The logging level to set.
+                If the value is a ``str``, it must be a valid level
+                defined in :mod:`logging`.
+
+        .. versionadded:: 0.4
+        """
+        self.logger.setLevel(level)
+
+    setLevel = set_level
+    """An alias for :meth:`set_level` provided for compatibility with
+    :meth:`logging.Logger.setLevel`.
+    """

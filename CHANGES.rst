@@ -6,6 +6,8 @@ Release TBD
 - Fix usage with application factory pattern
 - Resolve the logging instance at first access instead of keeping a reference
   to a proxy object
+- Add ``get_effective_level`` and ``set_level`` to set and get the
+  logging level respectively
 
 Version 0.3.1
 =============
