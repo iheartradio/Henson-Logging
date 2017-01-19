@@ -28,7 +28,7 @@ class Logging(Extension):
     """An interface to use structured logging.
 
     Args:
-        app (henson.base.Application, optional): An application
+        app (~typing.Optional[henson.base.Application]): An application
             instance that has an attribute named settings that contains
             a mapping of settings to configure logging.
     """
