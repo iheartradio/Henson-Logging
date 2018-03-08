@@ -93,6 +93,7 @@ class Logging(Extension):
             int: The effective level.
 
         .. versionadded:: 0.4
+
         """
         return self.logger.getEffectiveLevel()
 
@@ -107,6 +108,7 @@ class Logging(Extension):
 
         Returns:
             logging.RootLogger: The logger.
+
         """
         if not self._logger:
             settings = {
