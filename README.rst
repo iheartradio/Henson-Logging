@@ -3,7 +3,7 @@ Henson-Logging |build status|
 #############################
 
 .. |build status| image:: https://travis-ci.org/iheartradio/Henson-Logging.svg?branch=master
-   :target: https://travis-ci.org/iheartradio/Henso-Logging
+   :target: https://travis-ci.org/iheartradio/Henson-Logging
 
 A library to use structured logging with a Henson application.
 
