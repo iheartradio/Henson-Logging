@@ -1,7 +1,7 @@
 Version 0.4.0
 =============
 
-Release TBD
+Release 2018-04-02
 
 - Fix usage with application factory pattern
 - Resolve the logging instance at first access instead of keeping a reference
