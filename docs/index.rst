@@ -48,7 +48,7 @@ settings.
 +------------------------+----------------------------------------------------+
 | ``LOG_LEVEL``          | The threshold of logged messages. Any messages     |
 |                        | below this level will be ignored.                  |
-|                        | default: ``'INFO'``                                |
+|                        | default: ``'DEBUG'``                                |
 +------------------------+----------------------------------------------------+
 | ``LOG_CONTEXT_CLASS``  | The type of mapping to use to track field names    |
 |                        | included in messages.                              |
