@@ -83,7 +83,7 @@ class Logging(Extension):
     exception = lambda s, *a, **kw: s.logger.exception(*a, **kw)
     fatal = lambda s, *a, **kw: s.logger.fatal(*a, **kw)
     log = lambda s, *a, **kw: s.logger.log(*a, **kw)
-    setLevel = lambda s, l: s.logger.setLevel(l)
+    setLevel = lambda s, l: s.logger.setLevel(l)  # NOQA: N815
     warning = lambda s, *a, **kw: s.logger.warning(*a, **kw)
 
     def get_effective_level(self):
@@ -97,7 +97,7 @@ class Logging(Extension):
         """
         return self.logger.getEffectiveLevel()
 
-    getEffectiveLevel = get_effective_level
+    getEffectiveLevel = get_effective_level  # NOQA: N815
     """An alias for :meth:`get_effective_level` provided for
     compatibility with :meth:`logging.Logger.getEffectiveLevel`.
     """
@@ -160,7 +160,7 @@ class Logging(Extension):
         """
         self.logger.setLevel(level)
 
-    setLevel = set_level
+    setLevel = set_level  # NOQA: N815
     """An alias for :meth:`set_level` provided for compatibility with
     :meth:`logging.Logger.setLevel`.
     """
