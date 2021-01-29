@@ -1,13 +1,22 @@
+Version 0.5.0
+=============
+
+Released 2021-01-29
+
+- Drop support for Python < 3.8, add support for Python >= 3.8
+
+
 Version 0.4.0
 =============
 
-Release 2018-04-02
+Released 2018-04-02
 
 - Fix usage with application factory pattern
 - Resolve the logging instance at first access instead of keeping a reference
   to a proxy object
 - Add ``get_effective_level`` and ``set_level`` to set and get the
   logging level respectively
+
 
 Version 0.3.1
 =============
