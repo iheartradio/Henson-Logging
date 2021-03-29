@@ -58,6 +58,7 @@ class Logging(Extension):
         'LOG_CONTEXT_CLASS': dict,
         'LOG_FACTORY': structlog.stdlib.LoggerFactory(),
         'LOG_WRAPPER_CLASS': structlog.stdlib.BoundLogger,
+        'LOG_PROPAGATE': True,
     }
 
     def __init__(self, app=None):
@@ -74,8 +75,18 @@ class Logging(Extension):
                 initialize.
         """
         super().init_app(app)
+        # the lines defining log levels (critical, debug, etc)
+        # use the state of Henson base logger's (app.logger).
+        # In order to prevent the current henson_logging.Logger
+        # object from passing its log events to the Henson base
+        # logger's handler when invoking functions set in those lines,
+        # propagate must be false.
+        app.logger.propagate = app.settings['LOG_PROPAGATE']
         app.logger = self
 
+    # the invocation of these lambda functions rely on the state
+    # of s.logger (henson.base.Logger)
+    # at the time of variable setting
     critical = lambda s, *a, **kw: s.logger.critical(*a, **kw)
     debug = lambda s, *a, **kw: s.logger.debug(*a, **kw)
     error = lambda s, *a, **kw: s.logger.error(*a, **kw)

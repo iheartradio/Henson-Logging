@@ -1,3 +1,10 @@
+Version 0.6.0
+=============
+
+Released 2021-03-25
+
+- Allows the propagate logging property to be configured
+
 Version 0.5.0
 =============
 

@@ -20,8 +20,8 @@ def read(filename):
 
 setup(
     name='Henson-Logging',
-    version='0.5.0',
-    author='Andy Dirnberger, Jon Banafato, Leonard Bedner, and others',
+    version='0.6.0',
+    author='Andy Dirnberger, Jon Banafato, Leonard Bedner, Bo Guthrie, and others',
     author_email='henson@iheart.com',
     url='https://henson-logging.readthedocs.io',
     description='A library to use structured logging with a Henson application.',
