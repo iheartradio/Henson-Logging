@@ -9,6 +9,14 @@ from henson import Extension
 import structlog
 
 from . import processors
+import logging.handlers
+
+try:
+    import Queue as queue
+except ImportError:
+    import queue
+
+from logutils.queue import QueueHandler, QueueListener
 
 __all__ = ('Logging',)
 
@@ -64,7 +72,7 @@ class Logging(Extension):
     def __init__(self, app=None):
         """Initialize the instance."""
         super().__init__(app)
-
+        self._queue = queue.Queue(-1)
         self._logger = None
 
     def init_app(self, app):
@@ -156,6 +164,17 @@ class Logging(Extension):
             )
 
             self._logger = structlog.get_logger(self.app.name).bind()
+            qh = QueueHandler(self._queue)
+            self._logger.addHandler(qh)
+
+            handlers = []
+            for h in self._logger.handlers[:]:
+                if h is not qh:
+                    handlers.append(h)
+                    self._logger.removeHandler(h)
+
+            ql = QueueListener(self._queue, *handlers)
+            ql.start()
 
         return self._logger
 
